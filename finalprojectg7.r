@@ -26,4 +26,13 @@ dq_download_csv$年度 |>
 
 #找出最主要的死亡原因
 whichIsMax <- which.max(dq_download_csv$`人數-合計`)
-dq_download_csv$死亡原因[whichIsMax]
+majorreason = dq_download_csv$死亡原因[whichIsMax]
+
+#最高死亡原因的男女比
+dq_download_csv$`人數-男`[whichIsMax]/dq_download_csv$`人數-女`[whichIsMax]
+
+#平均每位男性死亡後給付金額
+dq_download_csv$`給付金額-男`[whichIsMax]/dq_download_csv$`人數-男`[whichIsMax]
+
+#平均每位女性死亡後給付金額
+dq_download_csv$`給付金額-女`[whichIsMax]/dq_download_csv$`人數-女`[whichIsMax]
