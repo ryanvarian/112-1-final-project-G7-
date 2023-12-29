@@ -21,6 +21,12 @@ whichIsMin <- which.min(dq_download_csv$`人數-合計`)
 whichIsMax2 <- which.max(dq_download_csv$`人數-男`)
 #找出女性最主要的死亡原因
 whichIsMax3 <- which.max(dq_download_csv$`人數-女`)
+#找出男性第四高的死亡原因
+fourth_largestmale <- sort(data$`人數-男`, decreasing = TRUE)[4]
+whichIsNo4M <- which(data$`人數-男`==fourth_largestmale)
+#找出女性第三高的死亡原因
+fourth_largestfemale <-sort(data$`人數-女`, decreasing = TRUE)[4]
+whichIsNo4F <- which(data$`人數-女`==fourth_largestfemale)
 
 #最高死亡原因的男女比
 #平均每位男性死亡後給付金額
@@ -30,9 +36,11 @@ whichIsMax3 <- which.max(dq_download_csv$`人數-女`)
 dq_download_csv |>
   dplyr::summarise(
     最高死亡原因  = 死亡原因[whichIsMax],
-    最低死亡原因  = 死亡原因[whichIsMin],
     男性最高最主要的死亡原因 = 死亡原因[whichIsMax2],
     女性最高最主要的死亡原因 = 死亡原因[whichIsMax3],
+    男性第四高的死亡原因 = 死亡原因[whichIsNo4M],
+    女性第四高的死亡原因 = 死亡原因[whichIsNo4F],
+    最低死亡原因  = 死亡原因[whichIsMin],
     最高死亡原因的男女比 = `人數-男`[whichIsMax]/`人數-女`[whichIsMax],
     平均每位男性死亡後給付金額 = `給付金額-男`[whichIsMax]/`人數-男`[whichIsMax],
     平均每位女性死亡後給付金額 = `給付金額-女`[whichIsMax]/`人數-女`[whichIsMax],
